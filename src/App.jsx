@@ -2,6 +2,7 @@ import { useColorMode, Button } from "@chakra-ui/react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 import Orders from "./components/Orders";
+import { FaMoon, FaSun } from "react-icons/fa";
 
 function App() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -10,11 +11,12 @@ function App() {
     <div>
       <Button
         onClick={toggleColorMode}
-        position="absolute"
+        position="relative"
+        cursor="pointer"
         top="1rem"
-        right="1rem"
+        left="20rem"
       >
-        Toggle {colorMode === "light" ? "Dark" : "Light"}
+        {colorMode === "light" ? <FaMoon /> : <FaSun />}
       </Button>
       <Routes>
         <Route path="/login" element={<Login />} />
