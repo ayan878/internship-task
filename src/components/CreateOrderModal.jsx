@@ -10,17 +10,23 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Select,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
 const CreateOrderModal = ({ isOpen, onClose, setOrders }) => {
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, reset } = useForm();
 
   const onSubmit = (values) => {
     // Mimic API call
-    const newOrder = { ...values, id: Date.now(), status: "active" };
-    setOrders((prev) => [...prev, newOrder]);
+    setOrders((prev) => [
+      ...prev,
+      {
+        id: prev.length + 1,
+        ...values,
+        lastModified: new Date().toLocaleString(),
+      },
+    ]);
+    reset();
     onClose();
   };
 
@@ -38,17 +44,18 @@ const CreateOrderModal = ({ isOpen, onClose, setOrders }) => {
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Customer</FormLabel>
-              <Select {...register("customer_id")}>
-                {/* Add customer options */}
-              </Select>
+              <Input {...register("customer")} />
             </FormControl>
             <FormControl mt={4}>
-              <FormLabel>Date</FormLabel>
-              <Input type="date" {...register("invoice_date")} />
+              <FormLabel>Price</FormLabel>
+              <Input type="number" {...register("price")} />
             </FormControl>
-            {/* Add other fields as necessary */}
+            <FormControl mt={4}>
+              <FormLabel>Customer ID</FormLabel>
+              <Input type="number" {...register("customerId")} />
+            </FormControl>
             <Button mt={4} colorScheme="teal" type="submit">
-              Create
+              Save
             </Button>
           </form>
         </ModalBody>
