@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Box, Button, Input, FormControl, FormLabel } from "@chakra-ui/react";
+import { Box, Button, Input, FormControl, FormLabel, } from "@chakra-ui/react";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -8,10 +9,13 @@ const Login = () => {
 
   const onSubmit = (values) => {
     if (values.username === "user" && values.password === "pass") {
+      toast.success("Login Successfully");
       localStorage.setItem("authenticated", true);
       navigate("/orders");
-    } else {
-      alert("Invalid credentials");
+    } else if (values.username === "" || values.password === "") {
+      toast.error("kindly enter the username and password");
+    } else if (values.username !== "user" || values.password !== "pass") {
+      toast.error("invalid credential");
     }
   };
 
@@ -19,6 +23,7 @@ const Login = () => {
     <Box width="300px" mx="auto" mt="100px">
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
+          <Toaster />
           <FormLabel>Username</FormLabel>
           <Input {...register("username")} />
         </FormControl>
