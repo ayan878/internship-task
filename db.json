@@ -3,10 +3,10 @@
     {
       "id": "1",
       "customerName": "John",
-      "customer_id": 11908,
-      "paid": false,
+      "customer_id": "1190",
+      "paid": true,
       "invoice_no": "Invoice-12345",
-      "invoice_date": "2024-05-01"
+      "invoice_date": "2024-05-2 17T00:00:00.000Z"
     },
     {
       "id": "2",
@@ -17,7 +17,15 @@
       "invoice_date": "2024-05-02"
     },
     {
-      "id": 3,
+      "id": "3",
+      "customerName": "Neha",
+      "customer_id": "2115",
+      "invoice_no": "6545",
+      "invoice_date": "2024-05-31T10:40:09.961Z",
+      "paid": true
+    },
+    {
+      "id": "4",
       "customerName": "Nehan",
       "customer_id": "2115",
       "invoice_no": "6545",
@@ -25,20 +33,114 @@
       "paid": false
     },
     {
-      "id": 4,
-      "customerName": "Nehan",
-      "customer_id": "2115",
-      "invoice_no": "6545",
-      "invoice_date": "2024-05-31T10:40:09.961Z",
-      "paid": false
-    },
-    {
-      "id": 5,
+      "id": "5",
       "customerName": "Nehan",
       "customer_id": "2115",
       "invoice_no": "6545",
       "invoice_date": "2024-05-31T10:41:31.710Z",
       "paid": false
+    },
+    {
+      "id": "6",
+      "customerName": "Neha",
+      "customer_id": "2115",
+      "invoice_no": "6545",
+      "invoice_date": "2024-05-31T10:40:09.961Z",
+      "paid": true
+    },
+    {
+      "id": "7",
+      "customerName": "Ayan Raza",
+      "customer_id": "2115",
+      "invoice_no": "5644",
+      "invoice_date": "2024-05-31T12:24:50.483Z",
+      "paid": true
+    },
+    {
+      "id": "8",
+      "customerName": "",
+      "customer_id": "",
+      "invoice_no": "",
+      "invoice_date": "2024-05-31T13:08:14.883Z",
+      "paid": false,
+      "products": [
+        {
+          "value": "209",
+          "label": "New Product",
+          "skus": [
+            {
+              "id": 248,
+              "selling_price": 54,
+              "max_retail_price": 44,
+              "amount": 33,
+              "unit": "kg",
+              "quantity_in_inventory": 0,
+              "product": 209
+            },
+            {
+              "id": 247,
+              "selling_price": 32,
+              "max_retail_price": 32,
+              "amount": 33,
+              "unit": "kg",
+              "quantity_in_inventory": 0,
+              "product": 209
+            },
+            {
+              "id": 246,
+              "selling_price": 23,
+              "max_retail_price": 21,
+              "amount": 22,
+              "unit": "kg",
+              "quantity_in_inventory": 1,
+              "product": 209
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "customerName": "Ayan Raza",
+      "customer_id": "2115",
+      "invoice_no": "5644",
+      "invoice_date": "2024-05-09T13:48:57.000Z",
+      "paid": true,
+      "products": [
+        {
+          "value": "209",
+          "label": "New Product",
+          "skus": [
+            {
+              "id": 248,
+              "selling_price": 54,
+              "max_retail_price": 44,
+              "amount": 33,
+              "unit": "kg",
+              "quantity_in_inventory": 0,
+              "product": 209
+            },
+            {
+              "id": 247,
+              "selling_price": 32,
+              "max_retail_price": 32,
+              "amount": 33,
+              "unit": "kg",
+              "quantity_in_inventory": 0,
+              "product": 209
+            },
+            {
+              "id": 246,
+              "selling_price": 23,
+              "max_retail_price": 21,
+              "amount": 22,
+              "unit": "kg",
+              "quantity_in_inventory": 1,
+              "product": 209
+            }
+          ]
+        }
+      ]
     }
   ],
   "completedOrders": [
