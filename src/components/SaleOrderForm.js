@@ -16,21 +16,25 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Checkbox, // Import Checkbox component from Chakra UI
+  Checkbox,
 } from "@chakra-ui/react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import ProductSelect from "./ProductSelect";
 
 const SaleOrderForm = ({ isOpen, onClose, initialValues }) => {
-  const { handleSubmit, control, reset } = useForm({
+  const { handleSubmit, control, reset, watch } = useForm({
     defaultValues: initialValues || {
       customerName: "",
       customer_id: "",
       invoice_no: "",
       invoice_date: new Date(),
       paid: false,
+      products: [],
     },
   });
+
+  const selectedProducts = watch("products");
 
   const { create, update } = useCreateSaleOrder();
   const [highestId, setHighestId] = useState(null);
@@ -46,7 +50,6 @@ const SaleOrderForm = ({ isOpen, onClose, initialValues }) => {
 
   const onSubmit = (data) => {
     if (initialValues) {
-      // Update existing order
       const updatedData = { ...initialValues, ...data };
       update.mutate(updatedData, {
         onSuccess: () => {
@@ -58,7 +61,6 @@ const SaleOrderForm = ({ isOpen, onClose, initialValues }) => {
         },
       });
     } else {
-      // Create new order with incremented ID
       const newData = { ...data, id: highestId + 1 };
       create.mutate(newData, {
         onSuccess: () => {
@@ -71,6 +73,8 @@ const SaleOrderForm = ({ isOpen, onClose, initialValues }) => {
       });
     }
   };
+
+  console.log("Selected Products:", selectedProducts); // Debugging line
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -124,6 +128,36 @@ const SaleOrderForm = ({ isOpen, onClose, initialValues }) => {
                 render={({ field }) => <Checkbox {...field} id="paid" />}
               />
             </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Products</FormLabel>
+              <Controller
+                name="products"
+                control={control}
+                render={({ field }) => (
+                  <ProductSelect
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
+                )}
+              />
+            </FormControl>
+
+            {Array.isArray(selectedProducts) &&
+              selectedProducts.map((product) => (
+                <div key={product.value} style={{ marginTop: "20px" }}>
+                  <h3>{product.label}</h3>
+                  {product.skus.map((sku) => (
+                    <div key={sku.id}>
+                      <p>Selling Price: {sku.selling_price}</p>
+                      <p>Max Retail Price: {sku.max_retail_price}</p>
+                      <p>Amount: {sku.amount}</p>
+                      <p>Unit: {sku.unit}</p>
+                      <p>Quantity in Inventory: {sku.quantity_in_inventory}</p>
+                    </div>
+                  ))}
+                </div>
+              ))}
+
             <ModalFooter>
               <Button colorScheme="blue" type="submit" mr={3}>
                 {initialValues ? "Update" : "Create"}
